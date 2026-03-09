@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby Shower — Casey & Ryan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #faf7f2;
+    --warm-white: #fffef9;
+    --sand: #e8dfd0;
+    --sand-2: #d9cdb8;
+    --blush: #e8b4a0;
+    --sage: #9db4a0;
+    --sky: #a8c4d4;
+    --butter: #e8d08a;
+    --text: #3a3228;
+    --text-muted: #7a6e62;
+    --text-faint: #b0a496;
+    --border: rgba(58,50,40,0.08);
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  html { -webkit-font-smoothing: antialiased; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── AMBIENT BG ── */
+  .bg-texture {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse at 10% 20%, rgba(232,180,160,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, rgba(168,196,212,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(157,180,160,0.08) 0%, transparent 60%);
+  }
+
+  .page {
+    position: relative; z-index: 1;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ── CARD ── */
+  .invite-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    padding: 48px 36px;
+    box-shadow: 0 2px 8px rgba(58,50,40,0.06), 0 12px 40px rgba(58,50,40,0.08);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  /* ── BABY BLOCKS ── */
+  .blocks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 160px;
+    margin: 0 auto 32px;
+  }
+
+  .block {
+    width: 72px;
+    height: 72px;
+    background: #f0ebe0;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      inset 0 -3px 0 rgba(58,50,40,0.08),
+      inset 3px 0 0 rgba(255,255,255,0.6),
+      0 2px 8px rgba(58,50,40,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .block::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(58,50,40,0.06);
+  }
+
+  .block-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  .block-b1 .block-letter { color: var(--sky); }
+  .block-a  .block-letter { color: var(--butter); }
+  .block-b2 .block-letter { color: var(--blush); }
+  .block-y  .block-letter { color: var(--sage); }
+
+  /* ── EYEBROW ── */
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 10px;
+  }
+
+  /* ── NAMES ── */
+  .names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .names-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .divider-line { flex: 1; height: 1px; background: var(--sand); }
+  .divider-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--sand-2); }
+
+  /* ── DETAILS ── */
+  .detail-row {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 14px;
+  }
+  .detail-row:last-child { margin-bottom: 0; }
+  .detail-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .detail-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .detail-value-sm {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.5;
+    margin-top: 1px;
+  }
+
+  /* ── HOST NOTE ── */
+  .host-note {
+    background: #f5f0e8;
+    border: 1px solid var(--sand);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    margin-top: 4px;
+    text-align: left;
+  }
+  .host-note-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 6px;
+  }
+  .host-note-text {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* ── HOSTED BY ── */
+  .hosted-by {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  .hosted-by-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 6px;
+  }
+  .hosted-by-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* ── REGISTRY CARD ── */
+  .registry-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 8px rgba(58,50,40,0.05), 0 8px 24px rgba(58,50,40,0.06);
+    text-align: center;
+  }
+
+  .registry-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 10px;
+  }
+
+  .registry-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .registry-sub {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+
+  /* ── BABYLIST BUTTON ── */
+  .babylist-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #fff;
+    border: 1.5px solid var(--sand);
+    border-radius: 100px;
+    padding: 13px 28px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(58,50,40,0.06);
+  }
+  .babylist-btn:hover {
+    border-color: var(--blush);
+    box-shadow: 0 4px 16px rgba(232,180,160,0.2);
+    transform: translateY(-1px);
+  }
+  .babylist-heart { font-size: 18px; }
+  .babylist-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+  .babylist-arrow {
+    font-size: 14px;
+    color: var(--text-faint);
+    margin-left: auto;
+  }
+
+  /* ── FOOTER ── */
+  .invite-footer {
+    text-align: center;
+    margin-top: 28px;
+  }
+  .invite-footer-text {
+    font-size: 12px;
+    color: var(--text-faint);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── FLOATING CONFETTI ── */
+  .confetti {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .dot {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.35;
+    animation: float linear infinite;
+  }
+  @keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.35; }
+    90% { opacity: 0.35; }
+    100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+  }
+
+  @media (max-width: 480px) {
+    .invite-card { padding: 36px 24px; }
+    .names { font-size: 36px; }
+  }
+
+  /* ── RSVP CARD ── */
+  .rsvp-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 32px;
+    box-shadow: 0 2px 8px rgba(58,50,40,0.05), 0 8px 24px rgba(58,50,40,0.06);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .rsvp-eyebrow {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--text-faint); margin-bottom: 10px;
+  }
+  .rsvp-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 500; color: var(--text); margin-bottom: 6px;
+  }
+  .rsvp-sub {
+    font-size: 13.5px; color: var(--text-muted); font-weight: 300;
+    line-height: 1.6; margin-bottom: 24px;
+  }
+
+  /* FORM */
+  .rsvp-form { display: flex; flex-direction: column; gap: 14px; text-align: left; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--text-faint);
+  }
+  .form-input, .form-select {
+    background: #faf7f2;
+    border: 1.5px solid var(--sand);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+  .form-input:focus, .form-select:focus {
+    border-color: var(--blush);
+    box-shadow: 0 0 0 3px rgba(232,180,160,0.15);
+  }
+  .form-input::placeholder { color: var(--text-faint); }
+
+  /* ATTENDANCE TOGGLE */
+  .attendance-toggle { display: flex; gap: 8px; }
+  .toggle-btn {
+    flex: 1; padding: 10px 8px;
+    background: #faf7f2;
+    border: 1.5px solid var(--sand);
+    border-radius: 10px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .toggle-btn:hover { border-color: var(--blush); color: var(--text); }
+  .toggle-btn.active-yes {
+    background: rgba(157,180,160,0.12);
+    border-color: var(--sage);
+    color: #5a7a5e;
+    font-weight: 600;
+  }
+  .toggle-btn.active-no {
+    background: rgba(232,180,160,0.12);
+    border-color: var(--blush);
+    color: #9a5a4a;
+    font-weight: 600;
+  }
+
+  /* SUBMIT */
+  .rsvp-submit {
+    background: var(--text);
+    border: none;
+    border-radius: 100px;
+    padding: 14px 28px;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px; font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    width: 100%;
+    letter-spacing: 0.06em;
+    transition: all 0.2s;
+    margin-top: 4px;
+  }
+  .rsvp-submit:hover {
+    background: #5a4e42;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(58,50,40,0.2);
+  }
+  .rsvp-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* SUCCESS STATE */
+  .rsvp-success {
+    display: none;
+    text-align: center;
+    padding: 20px 0 8px;
+  }
+  .rsvp-success-icon { font-size: 40px; margin-bottom: 12px; }
+  .rsvp-success-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px; font-weight: 500; color: var(--text); margin-bottom: 8px;
+  }
+  .rsvp-success-text { font-size: 14px; color: var(--text-muted); font-weight: 300; line-height: 1.6; }
+
+  /* HIDDEN FIELD TRICK */
+  .hidden-field { display: none; }
+
+</style>
+</head>
+<body>
+
+<div class="bg-texture"></div>
+
+<!-- subtle floating dots -->
+<div class="confetti" id="confetti"></div>
+
+<div class="page">
+
+  <!-- MAIN INVITE CARD -->
+  <div class="invite-card">
+
+    <!-- BABY BLOCKS -->
+    <div class="blocks-grid">
+      <div class="block block-b1"><span class="block-letter">B</span></div>
+      <div class="block block-a"><span class="block-letter">A</span></div>
+      <div class="block block-b2"><span class="block-letter">B</span></div>
+      <div class="block block-y"><span class="block-letter">Y</span></div>
+    </div>
+
+    <div class="eyebrow">Join us as we shower</div>
+    <div class="names">Casey & Ryan</div>
+    <div class="names-sub">on their new arrival</div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-dot"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- DATE -->
+    <div class="detail-row">
+      <div class="detail-label">When</div>
+      <div class="detail-value">Saturday, March 28 · 3:00 PM</div>
+    </div>
+
+    <!-- LOCATION -->
+    <div class="detail-row">
+      <div class="detail-label">Where</div>
+      <div class="detail-value">Page's Residence</div>
+      <div class="detail-value-sm">4090 Clubland Drive<br>Marietta, Georgia 30068</div>
+    </div>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <div class="divider-dot"></div>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- HOST NOTE -->
+    <div class="host-note">
+      <div class="host-note-label">A note from your hosts</div>
+      <div class="host-note-text">We kindly request for ladies to wear pants or shorts under dresses that allow them to play fun outdoor games. 🌸</div>
+    </div>
+
+    <!-- HOSTED BY -->
+    <div class="hosted-by">
+      <div class="hosted-by-label">Hosted by</div>
+      <div class="hosted-by-names">The Page's, the Hutchison's & Tita</div>
+    </div>
+
+  </div>
+
+
+  <!-- RSVP CARD -->
+  <div class="rsvp-card">
+    <div class="rsvp-eyebrow">RSVP</div>
+    <div class="rsvp-title">Will you be joining us?</div>
+    <div class="rsvp-sub">Please let us know by March 21st so we can plan accordingly.</div>
+
+    <!-- Netlify form — data-netlify="true" enables automatic form capture -->
+    <form
+      class="rsvp-form"
+      name="baby-shower-rsvp"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      id="rsvpForm"
+    >
+      <!-- Netlify hidden fields -->
+      <input type="hidden" name="form-name" value="baby-shower-rsvp" />
+      <p class="hidden-field"><input name="bot-field" /></p>
+
+      <!-- NAME ROW -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="firstName">First Name</label>
+          <input class="form-input" type="text" id="firstName" name="firstName" placeholder="First" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="lastName">Last Name</label>
+          <input class="form-input" type="text" id="lastName" name="lastName" placeholder="Last" required />
+        </div>
+      </div>
+
+      <!-- EMAIL -->
+      <div class="form-group">
+        <label class="form-label" for="email">Email (optional)</label>
+        <input class="form-input" type="email" id="email" name="email" placeholder="your@email.com" />
+      </div>
+
+      <!-- ATTENDANCE -->
+      <div class="form-group">
+        <label class="form-label">Attending?</label>
+        <div class="attendance-toggle">
+          <button type="button" class="toggle-btn" id="btnYes" onclick="setAttendance('yes')">🎉 Joyfully accepts</button>
+          <button type="button" class="toggle-btn" id="btnNo" onclick="setAttendance('no')">😢 Regretfully declines</button>
+        </div>
+        <input type="hidden" name="attending" id="attendingField" required />
+      </div>
+
+      <!-- GUEST COUNT (shows only if attending) -->
+      <div class="form-group" id="guestCountGroup" style="display:none;">
+        <label class="form-label" for="guestCount">Number of Guests</label>
+        <select class="form-select" id="guestCount" name="guestCount">
+          <option value="1">Just me</option>
+          <option value="2">2 guests</option>
+          <option value="3">3 guests</option>
+          <option value="4">4 guests</option>
+          <option value="5">5+ guests</option>
+        </select>
+      </div>
+
+      <!-- NOTE -->
+      <div class="form-group">
+        <label class="form-label" for="note">Leave a note (optional)</label>
+        <input class="form-input" type="text" id="note" name="note" placeholder="Can't wait to celebrate! 🎁" />
+      </div>
+
+      <button type="submit" class="rsvp-submit" id="submitBtn">Send My RSVP →</button>
+    </form>
+
+    <!-- SUCCESS MESSAGE -->
+    <div class="rsvp-success" id="rsvpSuccess">
+      <div class="rsvp-success-icon">🌸</div>
+      <div class="rsvp-success-title">You're all set!</div>
+      <div class="rsvp-success-text">Thank you — Casey & Ryan can't wait to celebrate with you. See you March 28th!</div>
+    </div>
+  </div>
+
+  <!-- REGISTRY CARD -->
+  <div class="registry-card">
+    <div class="registry-eyebrow">Gifting</div>
+    <div class="registry-title">Casey & Ryan's Baby Registry</div>
+    <div class="registry-sub">Your presence is the greatest gift — but if you'd like to celebrate the little one, here's where to find their registry. 🎁</div>
+
+    <a href="https://my.babylist.com/baby-casey-hutchison" target="_blank" class="babylist-btn">
+      <span class="babylist-heart">🩷</span>
+      <span class="babylist-text">babylist</span>
+      <span class="babylist-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="invite-footer">
+    <p class="invite-footer-text">With love · Casey & Ryan's Baby Shower · March 2026</p>
+  </div>
+
+</div>
+
+<script>
+  // Gentle floating dots for ambiance
+  const colors = ['#e8b4a0','#a8c4d4','#9db4a0','#e8d08a','#d9cdb8'];
+  const container = document.getElementById('confetti');
+  for (let i = 0; i < 18; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    const size = Math.random() * 8 + 4;
+    dot.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      left: ${Math.random() * 100}%;
+      animation-duration: ${Math.random() * 18 + 12}s;
+      animation-delay: ${Math.random() * 10}s;
+    `;
+    container.appendChild(dot);
+  }
+
+  // RSVP attendance toggle
+  function setAttendance(val) {
+    document.getElementById('attendingField').value = val;
+    const btnYes = document.getElementById('btnYes');
+    const btnNo = document.getElementById('btnNo');
+    const guestGroup = document.getElementById('guestCountGroup');
+    btnYes.className = 'toggle-btn' + (val === 'yes' ? ' active-yes' : '');
+    btnNo.className = 'toggle-btn' + (val === 'no' ? ' active-no' : '');
+    guestGroup.style.display = val === 'yes' ? 'flex' : 'none';
+  }
+
+  // Handle form submit — works both with Netlify and as a fallback
+  const rsvpForm = document.getElementById('rsvpForm');
+  if (rsvpForm) {
+    rsvpForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const attending = document.getElementById('attendingField').value;
+      if (!attending) { alert('Please let us know if you can attend!'); return; }
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      try {
+        const formData = new FormData(rsvpForm);
+        await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(formData).toString() });
+      } catch(err) { /* still show success even if fetch fails locally */ }
+      rsvpForm.style.display = 'none';
+      document.getElementById('rsvpSuccess').style.display = 'block';
+    });
+  }
+
+</script>
+
+</body>
+</html>
